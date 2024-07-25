@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Loan application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<body>
+
+<style>
+    body{
+        font-family: 'Montserrat', sans-serif;
+        color: greenyellow;
+        font-weight: 500;
+    }
+
+    .col{
+        height: 650px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 20px;
+        border: 1px solid darkslateblue;
+        padding: 10px 50px 50px;
+        background-color: green;
+    }
+
+    input[type="text"], input[type="number"]{
+        height: 30px;
+        width: 200px;
+        font-size: 14px;
+        border-radius: 10px;
+        border: 1px solid skyblue;
+        padding: 2px 10px;
+        color: black;
+    }
+
+    .wrapper{
+        width: 700px;
+        margin: auto;
+        margin-top: 10%
+    }
+
+    h1{
+        font-size: 25px;
+        color: black;
+    }
+
+    input {
+        outline: none;
+        border: 1px solid black;
+    }
+
+    input:focus{
+        border: 1px solid blue;
+    }
+
+    .listElem{
+        display: flex;
+        flex-direction: column
+    }
+
+    label{
+        margin-bottom: 5px;
+        margin-left: 5px;
+    }
+
+    .listElemLast button{
+        height: 30px;
+        width: 500px;
+        font-size: 14px;
+        border-radius: 10px;
+        border: 1px solid white;
+        color: black;
+        background-color: white;
+    }
+
+    .listElemLast button:hover{
+        color: cornflowerblue;
+    }
+
+    .error{
+        height: 40px;
+        width: 650px;
+        background-color: #a86d7b;
+        color: white;
+        border-radius: 15px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<form action="/application-loan" method="POST">
+    <div class="wrapper">
+        <div class="col">
+            <h1>Enter data to fill out a loan application</h1>
+
+            {{#errors}}
+                <div class="error">{{.}}</div>
+            {{/errors}}
+
+            <div class="listElem">
+                <label>Full name:</label>
+                <input type="text" name="fullName" placeholder="Lastname Name Surname" {{#client.fullName}}value="{{client.fullName}}"{{/client.fullName}} required>
+            </div>
+            <div class="listElem">
+                <label>Passport:</label>
+                <input type="text" name="idData" placeholder="1234 555555" {{#client.idData}}value="{{client.idData}}"{{/client.idData}} required>
+            </div>
+            <div>
+                <label>Family status:</label>
+                <input type="radio" id="singleOption" name="familyStatus" value="SINGLE" required {{#isSingle}}checked{{/isSingle}}>
+                <label for="singleOption">Single</label>
+                <input type="radio" id="marriedOption" name="familyStatus" value="MARRIED" required {{#isMarried}}checked{{/isMarried}}>
+                <label for="marriedOption">Married</label>
+                <input type="radio" id="divorcedOption" name="familyStatus" value="DIVORCED" required {{#isDivorced}}checked{{/isDivorced}}>
+                <label for="divorcedOption">Divorced</label>
+            </div>
+            <div class="listElem">
+                <label>Address:</label>
+                <input type="text" name="address" placeholder="Moscow st. Mira 43" {{#client.address}}value="{{client.address}}"{{/client.address}} required>
+            </div>
+            <div class="listElem">
+                <label>Telephone:</label>
+                <input type="text" name="phoneNumber" placeholder="+79991234567" {{#client.phoneNumber}}value="{{client.phoneNumber}}"{{/client.phoneNumber}} required>
+            </div>
+            <div class="listElem">
+                <label>Employment information:</label>
+                <input type="text" name="workingExperience" placeholder="organization position" {{#client.workingExperience}}value="{{client.workingExperience}}"{{/client.workingExperience}} required>
+            </div>
+            <div class="listElem">
+                <label>Amount of credit:</label>
+                <input type="number" name="loanAmount" placeholder="100000" min="0" step="0.01" {{#client.loanAmount}}value="{{client.loanAmount}}"{{/client.loanAmount}} required>
+            </div>
+            <div class="listElemLast">
+                <button type="submit">Apply</button>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
